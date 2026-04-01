@@ -5,7 +5,7 @@ export const middleware = async (request: NextRequest) => {
     const { pathname } = nextUrl;
 
     // ルートパスにアクセスした場合、/searchにリダイレクトする
-    if (pathname.startsWith("/")) {
+    if (pathname === '/') {
         return NextResponse.redirect(new URL("/search", nextUrl))
     }
     return NextResponse.next();
