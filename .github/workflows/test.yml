@@ -1,0 +1,26 @@
+name: Next.js Test
+
+on:
+    # 作業ブランチからdevelopブランチへプルリクを出した時に実行
+    pull_request:
+        types: [opened, reopened]
+        branches: ["develop"]
+
+jobs:
+    unit-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 22
+                  cache: "npm" # キャッシュを有効にして高速化
+                  cache-dependency-path: "package-lock.json"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run Tests
+              run: npm test -- --bail --maxWorkers=100% --watchAll=false --coverage --forceExit # jestコマンドを実行してテストを実行
