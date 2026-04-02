@@ -21,7 +21,7 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider>
-          <HeaderContainer />
+          <HeaderContainer title="Github Search App" />
           {children}
         </MantineProvider>
       </body>
