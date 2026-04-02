@@ -1,5 +1,17 @@
 import { GitHubRepository } from '@/types/github';
-import { Container, TextInput, Button, Group, Card, Text, Stack, Avatar, Grid } from '@mantine/core';
+import {
+    Container,
+    TextInput,
+    Button,
+    Group,
+    Card,
+    Text,
+    Stack,
+    Avatar,
+    Grid,
+    Center,
+    Pagination as MantinePagination
+} from '@mantine/core';
 import Link from 'next/link';
 
 interface SearchPresenterProps {
@@ -7,17 +19,23 @@ interface SearchPresenterProps {
     loading: boolean;
     results: GitHubRepository[];
     error: string | null;
-    onQueryChange: (val: string) => void;
+    activePage: number;
+    totalPages: number;
     onSearch: () => void;
+    onQueryChange: (val: string) => void;
+    onPageChange: (page: number) => void;
 }
 
 export default function SearchPresentation({
     query,
     loading,
     results,
+    activePage,
+    totalPages,
     error,
     onQueryChange,
     onSearch,
+    onPageChange
 }: SearchPresenterProps) {
     return (
         <Container size="md" py="sm">
@@ -37,8 +55,21 @@ export default function SearchPresentation({
                 <Grid>
                     <Grid.Col span={{ base: 12 }}>
                         <SearchList results={results} />
+
+                        {/* 結果がある場合のみページネーションを表示 */}
+                        {results.length > 0 && totalPages > 1 && (
+                            <Center my="lg">
+                                <Pagination
+                                    activePage={activePage}
+                                    totalPages={totalPages}
+                                    onPageChange={onPageChange}
+                                />
+                            </Center>
+                        )}
+
                     </Grid.Col>
                 </Grid>
+
             </Stack >
         </Container >
     );
@@ -116,5 +147,18 @@ export function SearchList({ results }: SearchListProps) {
                 ))
             }
         </>
+    )
+}
+
+type PaginationProps = Pick<SearchPresenterProps, 'activePage' | 'totalPages' | 'onPageChange'>;
+export function Pagination({ activePage, totalPages, onPageChange }: PaginationProps) {
+    return (
+        <Center my="lg">
+            <MantinePagination
+                total={totalPages}
+                value={activePage}
+                onChange={onPageChange}
+            />
+        </Center>
     )
 }
