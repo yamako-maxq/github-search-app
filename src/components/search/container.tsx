@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import SearchPresentation from './presentational';
-import { GitHubRepository, GitHubSearchResponse } from '@/types/github';
+import { GitHubRepository, GitHubSearchResponse } from '@/src/types/github';
 
 export default function SearchFormContainer() {
     const [query, setQuery] = useState('');

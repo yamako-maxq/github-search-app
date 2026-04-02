@@ -1,7 +1,7 @@
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
 import '@mantine/core/styles.css';
-import HeaderContainer from './_containers/header';
+import Header from '@/components/header';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 
 export const metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider>
-          <HeaderContainer />
+          <Header />
           {children}
         </MantineProvider>
       </body>
