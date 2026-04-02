@@ -119,6 +119,7 @@ export function SearchInput({ query, onQueryChange, onSearch, loading }: SearchI
                 value={query}
                 onChange={(e) => onQueryChange(e.currentTarget.value)}
                 style={{ flex: 1 }}
+                aria-label="search-input"
                 onKeyDown={(e) => e.key === 'Enter' && onSearch()}
             />
             <Button
@@ -145,52 +146,50 @@ type SearchListProps = Pick<SearchPresenterProps, 'results'>;
  */
 export function SearchList({ results }: SearchListProps) {
     return (
-        <>
+        <div aria-label="search-results">
             {
                 results.map((repo: GitHubRepository) => (
-                    <>
-                        <Card
-                            key={repo.id}
-                            shadow="none"
-                            padding="lg"
-                            radius="md"
-                            withBorder
-                            component={Link}
-                            href={`/repo/${repo.owner.login}/${repo.name}`}
-                            my={"lg"}
-                            style={{
-                                textDecoration: 'none',
-                                color: 'inherit',
-                                cursor: 'pointer',
-                                transition: 'border-color 0.2s ease',
-                            }}
-                        >
-                            <Group wrap="nowrap" gap="lg">
-                                {/* オーナーのアバター */}
-                                <Avatar
-                                    src={repo.owner.avatar_url}
-                                    size={60}
-                                    radius="xl"
-                                    color="blue"
-                                    alt={`${repo.owner.login}'s avatar`}
-                                />
+                    <Card
+                        key={repo.id}
+                        shadow="none"
+                        padding="lg"
+                        radius="md"
+                        withBorder
+                        component={Link}
+                        href={`/repo/${repo.owner.login}/${repo.name}`}
+                        my={"lg"}
+                        style={{
+                            textDecoration: 'none',
+                            color: 'inherit',
+                            cursor: 'pointer',
+                            transition: 'border-color 0.2s ease',
+                        }}
+                    >
+                        <Group wrap="nowrap" gap="lg">
+                            {/* オーナーのアバター */}
+                            <Avatar
+                                src={repo.owner.avatar_url}
+                                size={60}
+                                radius="xl"
+                                color="blue"
+                                alt={`${repo.owner.login}'s avatar`}
+                            />
 
-                                {/* リポジトリ名 */}
-                                <div style={{ flex: 1, overflow: 'hidden' }}>
-                                    <Text
-                                        fw={500}
-                                        size="lg"
-                                        truncate
-                                    >
-                                        {repo.name}
-                                    </Text>
-                                </div>
-                            </Group>
-                        </Card>
-                    </>
+                            {/* リポジトリ名 */}
+                            <div style={{ flex: 1, overflow: 'hidden' }}>
+                                <Text
+                                    fw={500}
+                                    size="lg"
+                                    truncate
+                                >
+                                    {repo.name}
+                                </Text>
+                            </div>
+                        </Group>
+                    </Card>
                 ))
             }
-        </>
+        </div>
     )
 }
 
@@ -210,9 +209,11 @@ export function SearchPagination({ activePage, totalPages, onPageChange }: Pagin
     return (
         <Center my="lg">
             <Pagination
+                id="search-pagination"
                 total={totalPages}
                 value={activePage}
                 onChange={onPageChange}
+                aria-label={"pagination"}
             />
         </Center>
     )
