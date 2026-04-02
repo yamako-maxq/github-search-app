@@ -1,5 +1,5 @@
 import SearchFormPresentation from "./presentational";
-import { GitHubRepository } from '@/src/types/github';
+import { GitHubRepository } from '@/types/github';
 
 interface SearchFormContainerProps {
     query: string;

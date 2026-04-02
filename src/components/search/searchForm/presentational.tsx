@@ -1,5 +1,5 @@
 "use client";
-import { GitHubRepository } from '@/src/types/github';
+import { GitHubRepository } from '@/types/github';
 import { TextInput, Button, Group } from '@mantine/core';
 
 interface SearchFormPresenterProps {

@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import SearchPresentation from './presentational';
-import { GitHubRepository, GitHubSearchResponse } from '@/src/types/github';
+import { GitHubRepository, GitHubSearchResponse } from '@/types/github';
 
 export default function SearchFormContainer() {
     const [query, setQuery] = useState('');
@@ -16,7 +16,7 @@ export default function SearchFormContainer() {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_GITHUB_API_URL}/search/repositories?q=${encodeURIComponent(query)}`);
             if (!res.ok) throw new Error('Failed to fetch repositories');
             const data: GitHubSearchResponse = await res.json();
             setResults(data.items || []);

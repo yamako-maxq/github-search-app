@@ -1,4 +1,4 @@
-import SearchContainer from "../_containers/search";
+import SearchContainer from "@/components/search";
 
 export default function Search() {
   return <SearchContainer />;
