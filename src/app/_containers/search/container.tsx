@@ -20,8 +20,12 @@ export default function SearchFormContainer() {
             if (!res.ok) throw new Error('Failed to fetch repositories');
             const data: GitHubSearchResponse = await res.json();
             setResults(data.items || []);
-        } catch (err: any) {
-            setError(err.message || 'An error occurred');
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('An unknown error occurred');
+            }
             setResults([]);
         } finally {
             setLoading(false);

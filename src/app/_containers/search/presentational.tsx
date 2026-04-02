@@ -1,5 +1,5 @@
 import { GitHubRepository } from '@/src/types/github';
-import { Container, TextInput, Button, Group, Card, Text, Stack, Title, Avatar, Grid } from '@mantine/core';
+import { Container, TextInput, Button, Group, Card, Text, Stack, Avatar, Grid } from '@mantine/core';
 import Link from 'next/link';
 
 interface SearchPresenterProps {
