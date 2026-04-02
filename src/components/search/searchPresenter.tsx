@@ -27,6 +27,22 @@ interface SearchPresenterProps {
     onPageChange: (page: number) => void;
 }
 
+/** 
+ * SearchPresentation component
+ * リポジトリの検索結果を表示するプレゼンテーションコンポーネント
+ * 
+ * @param query - 検索クエリ
+ * @param loading - ロード状態
+ * @param results - 検索結果のリポジトリリスト
+ * @param error - エラーメッセージ
+ * @param activePage - 現在のページ番号
+ * @param totalPages - 総ページ数
+ * @param onQueryChange - クエリ変更時の処理
+ * @param onSearch - 検索実行時の処理
+ * @param onPageChange - ページ変更時の処理
+ * 
+ * @returns リポジトリの検索結果
+ */
 export default function SearchPresentation({
     query,
     loading,
@@ -79,10 +95,21 @@ export default function SearchPresentation({
     );
 }
 
-// SearchPresenterPropsからquery, onQueryChange, onSearch, loadingのみを抜き取った型
+// SearchPresenterPropsから必要な型を抽出
 type SearchInputProps = Pick<SearchPresenterProps,
     "query" | "onQueryChange" | "onSearch" | "loading"
 >;
+/** 
+ * SearchInput component
+ * リポジトリの検索入力欄を表示するコンポーネント
+ * 
+ * @param query - 検索クエリ
+ * @param onQueryChange - クエリ変更時の処理
+ * @param onSearch - 検索実行時の処理
+ * @param loading - ロード状態
+ * 
+ * @returns 検索入力欄
+ */
 export function SearchInput({ query, onQueryChange, onSearch, loading }: SearchInputProps) {
     return (
         <Group align="flex-end">
@@ -106,8 +133,16 @@ export function SearchInput({ query, onQueryChange, onSearch, loading }: SearchI
     );
 }
 
-// SearchPresenterPropsからresultsのみを抜き取った型
+// SearchPresenterPropsから必要な型を抽出
 type SearchListProps = Pick<SearchPresenterProps, 'results'>;
+/** 
+ * SearchList component
+ * リポジトリの検索結果を表示するコンポーネント
+ * 
+ * @param results - 検索結果のリポジトリリスト
+ * 
+ * @returns リポジトリのリスト
+ */
 export function SearchList({ results }: SearchListProps) {
     return (
         <>
@@ -159,7 +194,18 @@ export function SearchList({ results }: SearchListProps) {
     )
 }
 
+// SearchPresenterPropsから必要な型を抽出
 type PaginationProps = Pick<SearchPresenterProps, 'activePage' | 'totalPages' | 'onPageChange'>;
+/** 
+ * SearchPagination component
+ * ページネーションを表示するコンポーネント
+ * 
+ * @param activePage - 現在のページ番号
+ * @param totalPages - 総ページ数
+ * @param onPageChange - ページ変更時のコールバック関数
+ * 
+ * @returns ページネーションコンポーネント
+*/
 export function SearchPagination({ activePage, totalPages, onPageChange }: PaginationProps) {
     return (
         <Center my="lg">
@@ -172,6 +218,14 @@ export function SearchPagination({ activePage, totalPages, onPageChange }: Pagin
     )
 }
 
+/** 
+ * SearchSkeleton component
+ * リポジトリの検索結果がロード中のときに表示されるスケルトンコンポーネント
+ * 
+ * @param count - 表示するスケルトンの数（デフォルトは5）
+ * 
+ * @returns スケルトンのリスト
+*/
 export function SearchSkeleton({ count = 5 }: { count?: number }) {
     return (
         <>
