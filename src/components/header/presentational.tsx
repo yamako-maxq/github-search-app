@@ -10,7 +10,7 @@ export default function HeaderPresentation({ title }: HeaderProps) {
     return (
         <header className={classes.header}>
             <Group h="100%" px="md">
-                <Link href="/search">
+                <Link href="/search" className={classes.title}>
                     <Text size="lg" fw={700}>
                         {title}
                     </Text>
