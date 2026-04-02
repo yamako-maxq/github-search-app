@@ -12,4 +12,4 @@ describe('HeaderContainer', () => {
         // Presentationalが正しくタイトルを表示しているか
         expect(screen.getByText(headerTitle)).toBeInTheDocument();
     });
-}); ``
+});
