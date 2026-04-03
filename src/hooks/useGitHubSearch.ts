@@ -8,7 +8,7 @@ const MAX_RESULTS = 1000;
 
 export const useGitHubSearch = () => {
     const [results, setResults] = useState<GitHubRepository[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [totalPages, setTotalPages] = useState(0);
 
