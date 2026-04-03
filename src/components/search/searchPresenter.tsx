@@ -157,7 +157,7 @@ export function SearchList({ results }: SearchListProps) {
                         radius="md"
                         withBorder
                         component={Link}
-                        href={`/repo/${repo.owner.login}/${repo.name}`}
+                        href={`/search/detail/${repo.owner.login}/${repo.name}`}
                         my={"lg"}
                         aria-label={`${repo.name}`}
                         style={{
