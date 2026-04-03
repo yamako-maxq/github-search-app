@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ja" {...mantineHtmlProps} suppressHydrationWarning>
       <head>
-        <ColorSchemeScript defaultColorScheme="auto" />
+        <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body>
         <MantineProvider>
