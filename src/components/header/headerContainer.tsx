@@ -1,5 +1,5 @@
-import HeaderPresentation from "./headerPresentor";
+import HeaderPresenter from "./headerPresenter";
 
 export default function HeaderContainer({ title }: { title: string }) {
-    return <HeaderPresentation title={title} />;
+    return <HeaderPresenter title={title} />;
 }
