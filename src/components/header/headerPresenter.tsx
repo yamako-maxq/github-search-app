@@ -6,7 +6,7 @@ type HeaderProps = {
     title: string;
 };
 
-export default function HeaderPresentation({ title }: HeaderProps) {
+export default function HeaderPresenter({ title }: HeaderProps) {
     return (
         <header className={classes.header}>
             <Group h="100%" px="md">
