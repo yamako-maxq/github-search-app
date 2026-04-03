@@ -1,11 +1,11 @@
 // GiHubのオーナーを表すインターフェース
-export interface GitHubOwner {
+export type GitHubOwner = {
     login: string;
     avatar_url: string;
 }
 
 // GitHubのリポジトリを表すインターフェース
-export interface GitHubRepository {
+export type GitHubRepository = {
     id: number;
     name: string;
     full_name: string;
@@ -20,7 +20,7 @@ export interface GitHubRepository {
 }
 
 // GitHubのリポジトリ検索APIのレスポンスを表すインターフェース
-export interface GitHubSearchResponse {
+export type GitHubSearchResponse = {
     total_count: number;
     items: GitHubRepository[];
 }

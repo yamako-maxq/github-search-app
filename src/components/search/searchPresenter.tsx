@@ -1,6 +1,7 @@
 import { GitHubRepository } from '@/types/github';
 import {
     Container,
+    Box,
     TextInput,
     Button,
     Group,
@@ -28,7 +29,7 @@ interface SearchPresenterProps {
 }
 
 /** 
- * SearchPresentation component
+ * SearchPresenter component
  * リポジトリの検索結果を表示するプレゼンテーションコンポーネント
  * 
  * @param query - 検索クエリ
@@ -43,7 +44,7 @@ interface SearchPresenterProps {
  * 
  * @returns リポジトリの検索結果
  */
-export default function SearchPresentation({
+export default function SearchPresenter({
     query,
     loading,
     results,
@@ -66,13 +67,13 @@ export default function SearchPresentation({
                 />
 
                 {/* エラー表示 */}
-                {error && <Text c="red">{error}</Text>}
+                {error && <Text>{error}</Text>}
 
                 {/* 検索結果 */}
                 <Grid>
                     <Grid.Col span={{ base: 12 }}>
                         {loading ? (
-                            <SearchSkeleton />
+                            <SearchSkeleton count={3} />
                         ) : (
                             <SearchList results={results} />
                         )}
@@ -146,7 +147,7 @@ type SearchListProps = Pick<SearchPresenterProps, 'results'>;
  */
 export function SearchList({ results }: SearchListProps) {
     return (
-        <div aria-label="search-results">
+        <>
             {
                 results.map((repo: GitHubRepository) => (
                     <Card
@@ -158,6 +159,7 @@ export function SearchList({ results }: SearchListProps) {
                         component={Link}
                         href={`/repo/${repo.owner.login}/${repo.name}`}
                         my={"lg"}
+                        aria-label={`${repo.name}`}
                         style={{
                             textDecoration: 'none',
                             color: 'inherit',
@@ -189,7 +191,7 @@ export function SearchList({ results }: SearchListProps) {
                     </Card>
                 ))
             }
-        </div>
+        </>
     )
 }
 
@@ -229,13 +231,19 @@ export function SearchPagination({ activePage, totalPages, onPageChange }: Pagin
 */
 export function SearchSkeleton({ count = 5 }: { count?: number }) {
     return (
-        <>
+        <Box component="div" aria-label={"search-skeleton"}>
             {Array.from({ length: count }).map((_, index) => (
-                <Card key={index} shadow="none" padding="lg" radius="md" withBorder my="lg">
+                <Card
+                    key={index}
+                    shadow="none"
+                    padding="lg"
+                    my="lg"
+                    radius="md"
+                    withBorder
+                >
                     <Group wrap="nowrap" gap="lg">
                         {/* アバター部分のスケルトン */}
                         <Skeleton height={60} circle />
-
                         {/* テキスト部分のスケルトン */}
                         <div style={{ flex: 1, overflow: 'hidden' }}>
                             <Skeleton height={24} width="60%" radius="xl" />
@@ -243,6 +251,6 @@ export function SearchSkeleton({ count = 5 }: { count?: number }) {
                     </Group>
                 </Card>
             ))}
-        </>
+        </Box>
     );
 }
