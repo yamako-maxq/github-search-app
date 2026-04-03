@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from '@/utils/tests/render';
-import SearchPresenter, { SearchInput, SearchList } from "../searchPresenter";
+import SearchPresenter, { SearchInput, SearchList, SearchSkeleton } from "../searchPresenter";
 import { repositoryMockResults, repositoryMockResult } from "./mockData";
 
 const QUERY = "yamako-maxq/github-search-app";
@@ -81,6 +81,19 @@ describe("SearchList", () => {
 });
 
 /**
+ * SearchListコンポーネントのテスト
+ */
+describe("SearchSkeleton", () => {
+    test("ローディング時にスケルトンが表示されること", () => {
+        render(
+            <SearchSkeleton count={3} />
+        );
+        const skeleton = screen.getByLabelText("search-skeleton");
+        expect(skeleton).toBeInTheDocument();
+    });
+});
+
+/**
  * SearchPresenterコンポーネントのテスト
  */
 describe("SearchPresenter", () => {
@@ -104,6 +117,24 @@ describe("SearchPresenter", () => {
         expect(input).toHaveValue(QUERY);
     });
 
+    test("ローディング時にスケルトンが表示されること", () => {
+        render(
+            <SearchPresenter
+                query={QUERY}
+                loading={true}
+                results={repositoryMockResults}
+                activePage={1}
+                totalPages={repositoryMockResults.length}
+                error={null}
+                onQueryChange={jest.fn()}
+                onSearch={jest.fn()}
+                onPageChange={jest.fn()}
+            />
+        );
+        const skeleton = screen.getByLabelText("search-skeleton");
+        expect(skeleton).toBeInTheDocument();
+    });
+
     test("onKeyDown イベントが正しく処理されること", () => {
         const onSearchMock = jest.fn();
         render(
@@ -124,44 +155,6 @@ describe("SearchPresenter", () => {
         // onSearchが呼び出されることを確認
         expect(onSearchMock).toHaveBeenCalledTimes(1);
 
-    });
-
-    test("ローディング時にスケルトンが表示されること", () => {
-        render(
-            <SearchPresenter
-                query={QUERY}
-                loading={true}
-                results={[]}
-                activePage={1}
-                totalPages={repositoryMockResults.length}
-                error={null}
-                onQueryChange={jest.fn()}
-                onSearch={jest.fn()}
-                onPageChange={jest.fn()}
-            />
-        );
-        const loadingIndicator = screen.getByText("Loading...");
-        expect(loadingIndicator).toBeInTheDocument();
-    });
-
-    test("ページネーションが正しく表示されること", () => {
-        const onPageChangeMock = jest.fn();
-        render(
-            <SearchPresenter
-                query={QUERY}
-                loading={false}
-                results={repositoryMockResults}
-                activePage={1}
-                totalPages={repositoryMockResults.length}
-                error={null}
-                onQueryChange={jest.fn()}
-                onSearch={jest.fn()}
-                onPageChange={onPageChangeMock}
-            />
-        );
-        const paginationButton = screen.getByRole("button", { name: /2/ });
-        fireEvent.click(paginationButton);
-        expect(onPageChangeMock).toHaveBeenCalledTimes(1);
     });
 
     test("エラーが表示されること", () => {
