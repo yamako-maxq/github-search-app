@@ -6,7 +6,6 @@ on:
     types: ["opened", "synchronize", "reopened"]
     branches: ["main", "develop"]
     paths:
-      - "test.yml"
       - "**.ts"
       - "**.tsx"
       - "**.cjs"
