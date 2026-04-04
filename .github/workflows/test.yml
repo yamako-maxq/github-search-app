@@ -5,6 +5,13 @@ on:
   pull_request:
     types: ["opened", "synchronize", "reopened"]
     branches: ["main", "develop"]
+    paths:
+      - "test.yml"
+      - "**.ts"
+      - "**.tsx"
+      - "**.cjs"
+      - "package.json"
+      - "package-lock.json"
 
 jobs:
   unit-test:
