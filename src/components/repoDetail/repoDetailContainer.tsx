@@ -1,61 +1,40 @@
 import RepoDetailPresentation from "./repoDetailPresenter";
+import { fetchGitHubRepositoryDetail } from "@/utils/apis/gitHubRepositoryDetail";
+import { notFound } from 'next/navigation'
 import { GitHubRepository } from "@/types/github";
-import { Container, Text, Button, Center, Stack } from "@mantine/core";
-import Link from "next/link";
+import { validateGitHubRepositoryDetail } from "@/utils/validations/gitHubRepositoryDetail";
 
-// Propsの型を定義
 type DetailPageProps = {
     owner: string;
     repo: string;
 }
 
-export default async function RepoDetailContainer({ owner, repo }: DetailPageProps) {
-    const detail = await getRepository(owner, repo);
-
-    // エラーハンドリング（リポジトリが見つからない、またはAPI制限）
-    if (!detail) {
-        return (
-            <Container size="sm" py="xl">
-                <Center style={{ height: "50vh" }}>
-                    <Stack align="center" gap="md">
-                        <Text size="xl" fw={700} c="red">リポジトリが見つかりませんでした</Text>
-                        <Text c="dimmed">URLが正しいか、APIの制限に達していないか確認してください。</Text>
-                        <Button component={Link} href="/" variant="light" mt="md">
-                            検索画面へ戻る
-                        </Button>
-                    </Stack>
-                </Center>
-            </Container>
-        );
-    }
-
-    // 取得したデータをPresenterに渡して描画
-    return <RepoDetailPresentation detail={detail} />;
-}
-
-
-
-/**
- * サーバーサイドでのデータフェッチ
+/** 
+ * リポジトリの詳細を表示するコンテナコンポーネント
+ * @param owner string - リポジトリのユーザー名
+ * @param repo string - リポジトリ名
+ * @returns リポジトリ詳細の検索結果
  */
-async function getRepository(owner: string, repo: string): Promise<GitHubRepository | null> {
-    const token = process.env.GITHUB_TOKEN;
-
-    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-        headers: {
-            // トークンがある場合はヘッダーに追加してレートリミットを緩和
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-            "Accept": "application/vnd.github.v3+json",
-            "X-GitHub-Api-Version": "2026-03-10",
-        },
-        // キャッシュ戦略: 60秒ごとにバックグラウンドで再検証(ISR)
-        next: { revalidate: 60 },
-    });
-
-    if (!res.ok) {
-        console.error(`GitHub API Error: ${res.status} ${res.statusText}`);
-        return null;
+export default async function RepoDetailContainer({ owner, repo }: DetailPageProps) {
+    // パラメーターのバリデーション
+    if (!validateGitHubRepositoryDetail(owner, repo)) {
+        throw new Error("Validation Error")
     }
 
-    return res.json();
+    // URLパラメータからリポジトリの詳細情報を取得
+    const response = await fetchGitHubRepositoryDetail(owner, repo);
+
+    // レスポンスに応じて処理を変える
+    if (response.status === 200) {
+        const detail: GitHubRepository | null = response.data ? response.data as GitHubRepository : null;
+        return <RepoDetailPresentation detail={detail} />;
+    } else if (response.status === 404) {
+        // リポジトリが見つからない場合は404ページを表示
+        notFound();
+    } else {
+        return <RepoDetailPresentation
+            detail={null}
+            errorMessage={response.message || "エラーが発生しました"}
+        />;
+    }
 }
