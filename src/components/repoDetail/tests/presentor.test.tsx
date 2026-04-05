@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
-import { render, screen, } from '@/utils/tests/render';
+import { render, screen, } from "@/utils/tests/render";
 import RepoDetailPresentation, { DetailCard, ErrorCard, StatsItem } from "../repoDetailPresenter";
 import { repositoryMockResult } from "./mockData"
-import { IconStar } from '@tabler/icons-react';
+import { IconStar } from "@tabler/icons-react";
 
 describe("RepoDetailPresentation", () => {
     test("詳細情報が正常に表示できているか", async () => {

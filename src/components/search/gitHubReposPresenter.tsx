@@ -1,4 +1,4 @@
-import { GitHubRepository } from '@/types/github';
+import { GitHubRepository } from "@/types/github";
 import {
     Container,
     Box,
@@ -13,8 +13,8 @@ import {
     Center,
     Skeleton,
     Pagination
-} from '@mantine/core';
-import Link from 'next/link';
+} from "@mantine/core";
+import Link from "next/link";
 
 type presenterProps = {
     query: string;
@@ -120,7 +120,7 @@ export function SearchInput({ query, onQueryChange, onSearch, loading }: SearchI
                 onChange={(e) => onQueryChange(e.currentTarget.value)}
                 style={{ flex: 1 }}
                 aria-label="search-input"
-                onKeyDown={(e) => e.key === 'Enter' && onSearch()}
+                onKeyDown={(e) => e.key === "Enter" && onSearch()}
             />
             <Button
                 size={"md"}
@@ -135,7 +135,7 @@ export function SearchInput({ query, onQueryChange, onSearch, loading }: SearchI
 }
 
 // presenterPropsから必要な型を抽出
-type SearchListProps = Pick<presenterProps, 'results'>;
+type SearchListProps = Pick<presenterProps, "results">;
 /** 
  * SearchList component
  * リポジトリの検索結果を表示するコンポーネント
@@ -160,10 +160,10 @@ export function SearchList({ results }: SearchListProps) {
                         my={"lg"}
                         aria-label={`${repo.name}`}
                         style={{
-                            textDecoration: 'none',
-                            color: 'inherit',
-                            cursor: 'pointer',
-                            transition: 'border-color 0.2s ease',
+                            textDecoration: "none",
+                            color: "inherit",
+                            cursor: "pointer",
+                            transition: "border-color 0.2s ease",
                         }}
                     >
                         <Group wrap="nowrap" gap="lg">
@@ -173,11 +173,11 @@ export function SearchList({ results }: SearchListProps) {
                                 size={60}
                                 radius="xl"
                                 color="blue"
-                                alt={`${repo.owner.login}'s avatar`}
+                                alt={`${repo.owner.login}"s avatar`}
                             />
 
                             {/* リポジトリ名 */}
-                            <div style={{ flex: 1, overflow: 'hidden' }}>
+                            <div style={{ flex: 1, overflow: "hidden" }}>
                                 <Text
                                     fw={500}
                                     size="lg"
@@ -195,7 +195,7 @@ export function SearchList({ results }: SearchListProps) {
 }
 
 // presenterPropsから必要な型を抽出
-type PaginationProps = Pick<presenterProps, 'activePage' | 'totalPages' | 'onPageChange'>;
+type PaginationProps = Pick<presenterProps, "activePage" | "totalPages" | "onPageChange">;
 /** 
  * SearchPagination component
  * ページネーションを表示するコンポーネント
@@ -244,7 +244,7 @@ export function SearchSkeleton({ count = 5 }: { count?: number }) {
                         {/* アバター部分のスケルトン */}
                         <Skeleton height={60} circle />
                         {/* テキスト部分のスケルトン */}
-                        <div style={{ flex: 1, overflow: 'hidden' }}>
+                        <div style={{ flex: 1, overflow: "hidden" }}>
                             <Skeleton height={24} width="60%" radius="xl" />
                         </div>
                     </Group>

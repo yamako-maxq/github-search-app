@@ -1,9 +1,9 @@
 
-import { render as testingLibraryRender } from '@testing-library/react';
-import { MantineProvider } from '@mantine/core';
-import userEvent from '@testing-library/user-event';
+import { render as testingLibraryRender } from "@testing-library/react";
+import { MantineProvider } from "@mantine/core";
+import userEvent from "@testing-library/user-event";
 
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 export { userEvent };
 
 /**

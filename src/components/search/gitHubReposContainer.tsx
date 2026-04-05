@@ -1,8 +1,8 @@
 "use client";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { useQueryState, parseAsInteger } from "nuqs";
-import SearchPresenter from './gitHubReposPresenter';
-import { useGitHubRepos } from '@/hooks/useGitHubRepos';
+import SearchPresenter from "./gitHubReposPresenter";
+import { useGitHubRepos } from "@/hooks/useGitHubRepos";
 
 export default function SearchGitHubReposContainer() {
     // GitHub検索のロジックをカスタムフックから取得
@@ -30,7 +30,7 @@ export default function SearchGitHubReposContainer() {
     const handlePageChange = (page: number) => {
         setActivePage(page);
         searchRepos(query, page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     // 初回表示時に、検索条件があれば検索を行う

@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense } from "react";
 import GitHubReposContainer from "@/components/search";
 import Loader from "@/components/loader"
 

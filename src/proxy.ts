@@ -5,7 +5,7 @@ export const proxy = async (request: NextRequest) => {
     const { pathname } = nextUrl;
 
     // ルートパスにアクセスした場合、/searchにリダイレクトする
-    if (pathname === '/' || pathname === '') {
+    if (pathname === "/" || pathname === "") {
         return NextResponse.redirect(new URL("/search/repositories", nextUrl))
     }
     return NextResponse.next();
@@ -14,6 +14,6 @@ export const proxy = async (request: NextRequest) => {
 // Proxyを実行するパスを指定
 export const config = {
     matcher: [
-        '/((?!api|_next/static|_next/image|favicon.ico).*)',
+        "/((?!api|_next/static|_next/image|favicon.ico).*)",
     ],
 };

@@ -7,7 +7,7 @@ import {
     Skeleton,
     SimpleGrid,
     Paper
-} from '@mantine/core';
+} from "@mantine/core";
 
 export default function DetailLoading() {
     return (

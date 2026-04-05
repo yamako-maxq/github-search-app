@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen, fireEvent } from '@/utils/tests/render';
+import { render, screen, fireEvent } from "@/utils/tests/render";
 import GitHubRepos, { SearchInput, SearchList, SearchSkeleton } from "../gitHubReposPresenter";
 import { repositoryMockResults, repositoryMockResult } from "./mockData";
 
@@ -63,7 +63,7 @@ describe("GitHubRepos", () => {
             />
         );
         const input = screen.getByLabelText("search-input");
-        fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+        fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
         // onSearchが呼び出されることを確認
         expect(onSearchMock).toHaveBeenCalledTimes(1);
 
@@ -118,7 +118,7 @@ describe("SearchInput", () => {
             />
         );
         const input = screen.getByLabelText("search-input");
-        fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+        fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
         expect(onSearchMock).toHaveBeenCalledTimes(1);
     });
 
@@ -155,7 +155,7 @@ describe("SearchList", () => {
             />
         );
         // nameには、リンクの中にあるテキスト（repo.name）を指定します
-        const links = screen.getAllByRole('link');
+        const links = screen.getAllByRole("link");
         expect(links).toHaveLength(3);
         expect(links[0]).toHaveTextContent("repo1");
         expect(links[1]).toHaveTextContent("repo2");

@@ -1,11 +1,8 @@
-import { useState } from 'react';
-import { GitHubRepository, GitHubSearchResponse } from '@/types/github';
-import { fetchGitHubRepos } from '@/utils/apis/fetchGitHubRepos';
-import { validateGitHubRepos } from '@/utils/validations/gitHubRepos';
-
-// 定数を外部ファイルに切り出すことを推奨
-const PER_PAGE = 30;
-const MAX_RESULTS = 1000;
+import { useState } from "react";
+import { config } from "@/config/config";
+import { GitHubRepository, GitHubSearchResponse } from "@/types/github";
+import { fetchGitHubRepos } from "@/utils/apis/fetchGitHubRepos";
+import { validateGitHubRepos } from "@/utils/validations/gitHubRepos";
 
 export const useGitHubRepos = () => {
     const [results, setResults] = useState<GitHubRepository[]>([]);
@@ -15,7 +12,7 @@ export const useGitHubRepos = () => {
 
     // GitHubリポジトリを検索する
     const searchRepos = async (query: string, page: number) => {
-        if (query.trim() === '') return;
+        if (query.trim() === "") return;
         if(!validateGitHubRepos(query)){
             setError("入力値が正しくありません")
         }
@@ -31,7 +28,7 @@ export const useGitHubRepos = () => {
         }
 
         initFetch()
-        const response = await fetchGitHubRepos(query, page, PER_PAGE);
+        const response = await fetchGitHubRepos(query, page, config.api.searchReposPerPage);
         if (response.status === 200) {
             const data = response.data ? response.data as GitHubSearchResponse : null;
             if (!data) {
@@ -42,8 +39,8 @@ export const useGitHubRepos = () => {
                 setError("検索条件に一致するリポジトリはありませんでした");
             }
             setResults(data.items);
-            const totalCount = Math.min(data.total_count, MAX_RESULTS);
-            setTotalPages(Math.ceil(totalCount / PER_PAGE));
+            const totalCount = Math.min(data.total_count, config.api.searchReposMaxResults);
+            setTotalPages(Math.ceil(totalCount / config.api.searchReposPerPage));
         } else {
             resetHandler()
             setError(response.message ?? "API呼び出し時にエラーが発生しました")

@@ -5,7 +5,6 @@ import HeaderPresenter from "../headerPresenter";
 
 // ヘッダーのタイトル
 const headerTitle = "Github Search App";
-const topPath = "/search";
 
 describe("headerPresenter", () => {
     it("渡されたタイトルが正しくレンダリングされること", () => {

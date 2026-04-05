@@ -1,4 +1,4 @@
-import { GitHubRepository } from '@/types/github';
+import { GitHubRepository } from "@/types/github";
 import {
     Container,
     Card,
@@ -13,13 +13,13 @@ import {
     Box,
     Button,
     Center,
-} from '@mantine/core';
+} from "@mantine/core";
 import {
     IconStar,
     IconEye,
     IconGitFork,
     IconAlertCircle
-} from '@tabler/icons-react';
+} from "@tabler/icons-react";
 import Link from "next/link";
 
 /** 
@@ -82,7 +82,7 @@ export function DetailCard(props: {
                     <Title
                         order={2}
                         mb={"5px"}
-                        style={{ wordBreak: 'break-all' }}
+                        style={{ wordBreak: "break-all" }}
                         aria-label="repository name"
                         data-testid="repository-name"
                     >

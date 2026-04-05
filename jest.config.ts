@@ -3,11 +3,11 @@
  * https://jestjs.io/docs/configuration
  */
 
-import type {Config} from 'jest';
-import nextJest from 'next/jest.js'
+import type {Config} from "jest";
+import nextJest from "next/jest.js"
 
 const createJestConfig = nextJest({
-  dir: './',
+  dir: "./",
 })
 
 const config: Config = {
@@ -77,7 +77,7 @@ const config: Config = {
   // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
   // maxWorkers: "50%",
 
-  // An array of directory names to be searched recursively up from the requiring module's location
+  // An array of directory names to be searched recursively up from the requiring module"s location
   // moduleDirectories: [
   //   "node_modules"
   // ],
@@ -99,7 +99,7 @@ const config: Config = {
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
 
-  // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
+  // An array of regexp pattern strings, matched against all module paths before considered "visible" to the module loader
   // modulePathIgnorePatterns: [],
 
   // Activates notifications for test results
@@ -108,7 +108,7 @@ const config: Config = {
   // An enum that specifies notification mode. Requires { notify: true }
   // notifyMode: "failure-change",
 
-  // A preset that is used as a base for Jest's configuration
+  // A preset that is used as a base for Jest"s configuration
   // preset: undefined,
 
   // Run tests from one or more projects
@@ -137,7 +137,7 @@ const config: Config = {
   //   "<rootDir>"
   // ],
 
-  // Allows you to use a custom runner instead of Jest's default test runner
+  // Allows you to use a custom runner instead of Jest"s default test runner
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test

@@ -1,5 +1,5 @@
 import { httpResponse } from "@/types/httpResponse";
-import { GitHubSearchResponse } from '@/types/github';
+import { GitHubSearchResponse } from "@/types/github";
 
 const API_URL = process.env.NEXT_PUBLIC_GITHUB_API_URL;
 if (!API_URL) {
@@ -26,8 +26,8 @@ export const fetchGitHubRepos = async (
     });
 
     const res = await fetch(`${API_URL}/search/repositories?${params}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
         cache: "force-cache"
     });
 
