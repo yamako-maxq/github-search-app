@@ -1,3 +1,3 @@
-import SearchContainer from "./searchContainer";
+import GitHubReposContainer from "./gitHubReposContainer";
 
-export default SearchContainer;
+export default GitHubReposContainer;
