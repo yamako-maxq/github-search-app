@@ -1,6 +1,9 @@
+// Import styles of packages that you"ve installed.
+// All packages except `@mantine/hooks` require styles imports
 import { Metadata } from "next";
 import "@mantine/core/styles.css";
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import HeaderContainer from "@/components/header";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata: Metadata = {
   title: "Github Search App",
@@ -21,15 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" {...mantineHtmlProps}>
-      <head>
-        <ColorSchemeScript defaultColorScheme="light" />
-      </head>
-      <body>
-        <MantineProvider>
-          {children}
-        </MantineProvider>
-      </body>
-    </html>
+    <>
+      <HeaderContainer title="Github Search App" />
+      <NuqsAdapter>{children}</NuqsAdapter>
+    </>
   );
 }
