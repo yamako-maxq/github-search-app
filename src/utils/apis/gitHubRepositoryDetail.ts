@@ -13,6 +13,11 @@ if (!API_URL) {
  * @returns Promise<httpResponse<GitHubRepository>> - レスポンス
  */
 export const fetchGitHubRepositoryDetail = async (owner: string, repo: string): Promise<httpResponse<GitHubRepository>> => {
+
+    return {
+        status: 500,
+        message: "APIのリクエスト制限に達しました しばらくしてから再度お試しください"
+    };
     const token = process.env.GITHUB_TOKEN;
     const res = await fetch(`${API_URL}/repos/${owner}/${repo}`, {
         headers: {

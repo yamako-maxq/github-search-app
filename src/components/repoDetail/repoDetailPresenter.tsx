@@ -20,7 +20,6 @@ import {
     IconGitFork,
     IconAlertCircle
 } from "@tabler/icons-react";
-import Link from "next/link";
 
 /** 
  * リポジトリの詳細を表示するプレゼンテーションコンポーネント
@@ -214,11 +213,9 @@ export function ErrorCard({ errorMessage }: { errorMessage?: string }) {
                         </Text>
                     </Box>
                 </Group>
-                <Link href="/" passHref>
-                    <Button w={"100%"} component="a" variant="outline" mt="md">
-                        戻る
-                    </Button>
-                </Link>
+                <Button w={"100%"} component={"a"} href={"/"} variant="outline" mt="md">
+                    戻る
+                </Button>
             </Card>
         </Center>
     );
