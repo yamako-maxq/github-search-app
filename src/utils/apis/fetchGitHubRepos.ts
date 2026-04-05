@@ -43,7 +43,7 @@ export const fetchGitHubRepos = async (
                 console.error("Validation failed");
                 return {
                     status: res.status,
-                    message: "リクエストに失敗しました"
+                    message: "リクエストされた値が正しくありません"
                 };
             case 503:
                 // リポジトリが見つからない場合はnullを返す
@@ -68,18 +68,4 @@ export const fetchGitHubRepos = async (
         data: data
     }
 
-};
-
-/**
- * APIリクエストのパラメータを検証する
- * @param page ページ番号
- * @param perPage 1ページあたりの結果数
- */
-export const validateParams = (page: number, perPage: number): void => {
-    if (page < 1) {
-        throw new Error("ページ番号は1以上である必要があります。");
-    }
-    if (perPage < 1 || perPage > 100) {
-        throw new Error("1ページあたりの結果数は1から100の間である必要があります。");
-    }
 };
