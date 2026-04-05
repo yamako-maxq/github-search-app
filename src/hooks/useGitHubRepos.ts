@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { config } from "@/config/config";
 import { GitHubRepository, GitHubSearchResponse } from "@/types/github";
 import { fetchGitHubRepos } from "@/utils/apis/fetchGitHubRepos";
@@ -11,7 +11,7 @@ export const useGitHubRepos = () => {
     const [totalPages, setTotalPages] = useState(0);
 
     // GitHubリポジトリを検索する
-    const searchRepos = async (query: string, page: number) => {
+    const searchRepos = useCallback(async (query: string, page: number) => {
         if (query.trim() === "") return;
         if (!validateGitHubRepos(query, page)) {
             setError("リクエストされた値が正しくありません")
@@ -63,7 +63,7 @@ export const useGitHubRepos = () => {
             resetHandler()
             return
         }
-    };
+    }, [])
 
     return { results, loading, error, totalPages, searchRepos };
 };
