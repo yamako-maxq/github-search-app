@@ -90,7 +90,6 @@ export default function GitHubRepos({
                         )}
                     </Grid.Col>
                 </Grid>
-
             </Stack >
         </Container >
     );

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect } from 'react';
 import { useQueryState, parseAsInteger } from "nuqs";
 import SearchPresenter from './gitHubReposPresenter';
@@ -33,10 +33,17 @@ export default function SearchGitHubReposContainer() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    useEffect(() => {
+    // 初回表示時に、検索条件があれば検索を行う
+    const handleFirstLoad = () => {
+        if (query.trim() === "") return;
         setActivePage(activePage);
         searchRepos(query, activePage);
-    }, [activePage, query, searchRepos, setActivePage])
+    }
+    
+    useEffect(() => {
+        handleFirstLoad()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <SearchPresenter
