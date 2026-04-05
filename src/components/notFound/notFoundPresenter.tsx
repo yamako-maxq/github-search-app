@@ -1,6 +1,6 @@
-import { Button, Container, Group, Title } from '@mantine/core';
-import classes from './styles/notFound.module.css';
-import Link from 'next/link';
+import { Button, Container, Group, Title } from "@mantine/core";
+import classes from "./styles/notFound.module.css";
+import Link from "next/link";
 
 export default function NotFoundPresenter() {
     return (
