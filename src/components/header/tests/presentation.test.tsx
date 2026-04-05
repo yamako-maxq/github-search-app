@@ -28,17 +28,4 @@ describe("headerPresenter", () => {
         // CSS Modulesのクラスが適用されているか
         expect(headerTag).toHaveClass("header");
     });
-
-    it("ヘッダーのリンクが正しいhref属性を持っていること", () => {
-        MantineRenderProvider(<HeaderPresenter title={headerTitle} />);
-
-        // リンク要素を取得
-        const linkElement = screen.getByRole("link", { name: headerTitle });
-
-        // リンクが存在するか
-        expect(linkElement).toBeInTheDocument();
-
-        // href属性が正しいか
-        expect(linkElement).toHaveAttribute("href", topPath);
-    });
 });

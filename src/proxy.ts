@@ -6,7 +6,7 @@ export const proxy = async (request: NextRequest) => {
 
     // ルートパスにアクセスした場合、/searchにリダイレクトする
     if (pathname === '/' || pathname === '') {
-        return NextResponse.redirect(new URL("/search", nextUrl))
+        return NextResponse.redirect(new URL("/search/repositories", nextUrl))
     }
     return NextResponse.next();
 }

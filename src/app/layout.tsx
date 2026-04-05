@@ -3,6 +3,7 @@
 import '@mantine/core/styles.css';
 import HeaderContainer from '@/components/header';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata = {
   title: 'Github Search App',
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body>
         <MantineProvider>
           <HeaderContainer title="Github Search App" />
-          {children}
+          <NuqsAdapter>{children}</NuqsAdapter>
         </MantineProvider>
       </body>
     </html>

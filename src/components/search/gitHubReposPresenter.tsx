@@ -16,7 +16,7 @@ import {
 } from '@mantine/core';
 import Link from 'next/link';
 
-interface SearchPresenterProps {
+type presenterProps = {
     query: string;
     loading: boolean;
     results: GitHubRepository[];
@@ -44,7 +44,7 @@ interface SearchPresenterProps {
  * 
  * @returns リポジトリの検索結果
  */
-export default function SearchPresenter({
+export default function GitHubRepos({
     query,
     loading,
     results,
@@ -54,9 +54,9 @@ export default function SearchPresenter({
     onQueryChange,
     onSearch,
     onPageChange
-}: SearchPresenterProps) {
+}: presenterProps) {
     return (
-        <Container size="md" py="sm">
+        <Container size="md" py="sm" data-testid="search-container">
             <Stack gap="md">
                 {/* 検索バーおよびボタン */}
                 <SearchInput
@@ -90,14 +90,13 @@ export default function SearchPresenter({
                         )}
                     </Grid.Col>
                 </Grid>
-
             </Stack >
         </Container >
     );
 }
 
-// SearchPresenterPropsから必要な型を抽出
-type SearchInputProps = Pick<SearchPresenterProps,
+// presenterPropsから必要な型を抽出
+type SearchInputProps = Pick<presenterProps,
     "query" | "onQueryChange" | "onSearch" | "loading"
 >;
 /** 
@@ -135,8 +134,8 @@ export function SearchInput({ query, onQueryChange, onSearch, loading }: SearchI
     );
 }
 
-// SearchPresenterPropsから必要な型を抽出
-type SearchListProps = Pick<SearchPresenterProps, 'results'>;
+// presenterPropsから必要な型を抽出
+type SearchListProps = Pick<presenterProps, 'results'>;
 /** 
  * SearchList component
  * リポジトリの検索結果を表示するコンポーネント
@@ -195,8 +194,8 @@ export function SearchList({ results }: SearchListProps) {
     )
 }
 
-// SearchPresenterPropsから必要な型を抽出
-type PaginationProps = Pick<SearchPresenterProps, 'activePage' | 'totalPages' | 'onPageChange'>;
+// presenterPropsから必要な型を抽出
+type PaginationProps = Pick<presenterProps, 'activePage' | 'totalPages' | 'onPageChange'>;
 /** 
  * SearchPagination component
  * ページネーションを表示するコンポーネント

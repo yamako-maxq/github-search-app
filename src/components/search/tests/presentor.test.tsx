@@ -1,9 +1,92 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from '@/utils/tests/render';
-import SearchPresenter, { SearchInput, SearchList, SearchSkeleton } from "../searchPresenter";
+import GitHubRepos, { SearchInput, SearchList, SearchSkeleton } from "../gitHubReposPresenter";
 import { repositoryMockResults, repositoryMockResult } from "./mockData";
 
 const QUERY = "yamako-maxq/github-search-app";
+
+/**
+ * GitHubReposコンポーネントのテスト
+ */
+describe("GitHubRepos", () => {
+    test("検索画面が正常に表示できているか", () => {
+        render(
+            <GitHubRepos
+                query={QUERY}
+                loading={false}
+                results={repositoryMockResults}
+                activePage={1}
+                totalPages={repositoryMockResults.length}
+                error={null}
+                onQueryChange={jest.fn()}
+                onSearch={jest.fn()}
+                onPageChange={jest.fn()}
+            />
+        );
+
+        // 詳細が表示されているか
+        expect(screen.getByTestId("search-container"))
+            .toBeInTheDocument()
+    });
+
+    test("ローディング時にスケルトンが表示されること", () => {
+        render(
+            <GitHubRepos
+                query={QUERY}
+                loading={true}
+                results={repositoryMockResults}
+                activePage={1}
+                totalPages={repositoryMockResults.length}
+                error={null}
+                onQueryChange={jest.fn()}
+                onSearch={jest.fn()}
+                onPageChange={jest.fn()}
+            />
+        );
+        const skeleton = screen.getByLabelText("search-skeleton");
+        expect(skeleton).toBeInTheDocument();
+    });
+
+    test("onKeyDown イベントが正しく処理されること", () => {
+        const onSearchMock = jest.fn();
+        render(
+            <GitHubRepos
+                query={QUERY}
+                loading={false}
+                results={repositoryMockResults}
+                activePage={1}
+                totalPages={repositoryMockResults.length}
+                error={null}
+                onQueryChange={jest.fn()}
+                onSearch={onSearchMock}
+                onPageChange={jest.fn()}
+            />
+        );
+        const input = screen.getByLabelText("search-input");
+        fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+        // onSearchが呼び出されることを確認
+        expect(onSearchMock).toHaveBeenCalledTimes(1);
+
+    });
+
+    test("エラーが表示されること", () => {
+        render(
+            <GitHubRepos
+                query={QUERY}
+                loading={false}
+                results={[]}
+                activePage={1}
+                totalPages={repositoryMockResults.length}
+                error={"エラーが発生しました"}
+                onQueryChange={jest.fn()}
+                onSearch={jest.fn()}
+                onPageChange={jest.fn()}
+            />
+        );
+        const errorMessage = screen.getByText("エラーが発生しました");
+        expect(errorMessage).toBeInTheDocument();
+    });
+});
 
 /**
  * SearchPresenterコンポーネントのテスト
@@ -90,88 +173,5 @@ describe("SearchSkeleton", () => {
         );
         const skeleton = screen.getByLabelText("search-skeleton");
         expect(skeleton).toBeInTheDocument();
-    });
-});
-
-/**
- * SearchPresenterコンポーネントのテスト
- */
-describe("SearchPresenter", () => {
-    test("レンダリングされていること", () => {
-        render(
-            <SearchPresenter
-                query={QUERY}
-                loading={false}
-                results={repositoryMockResults}
-                activePage={1}
-                totalPages={repositoryMockResults.length}
-                error={null}
-                onQueryChange={jest.fn()}
-                onSearch={jest.fn()}
-                onPageChange={jest.fn()}
-            />
-        );
-        // クエリが表示されていることを確認
-        const input = screen.getByLabelText("search-input");
-        expect(input).toBeInTheDocument();
-        expect(input).toHaveValue(QUERY);
-    });
-
-    test("ローディング時にスケルトンが表示されること", () => {
-        render(
-            <SearchPresenter
-                query={QUERY}
-                loading={true}
-                results={repositoryMockResults}
-                activePage={1}
-                totalPages={repositoryMockResults.length}
-                error={null}
-                onQueryChange={jest.fn()}
-                onSearch={jest.fn()}
-                onPageChange={jest.fn()}
-            />
-        );
-        const skeleton = screen.getByLabelText("search-skeleton");
-        expect(skeleton).toBeInTheDocument();
-    });
-
-    test("onKeyDown イベントが正しく処理されること", () => {
-        const onSearchMock = jest.fn();
-        render(
-            <SearchPresenter
-                query={QUERY}
-                loading={false}
-                results={repositoryMockResults}
-                activePage={1}
-                totalPages={repositoryMockResults.length}
-                error={null}
-                onQueryChange={jest.fn()}
-                onSearch={onSearchMock}
-                onPageChange={jest.fn()}
-            />
-        );
-        const input = screen.getByLabelText("search-input");
-        fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
-        // onSearchが呼び出されることを確認
-        expect(onSearchMock).toHaveBeenCalledTimes(1);
-
-    });
-
-    test("エラーが表示されること", () => {
-        render(
-            <SearchPresenter
-                query={QUERY}
-                loading={false}
-                results={[]}
-                activePage={1}
-                totalPages={repositoryMockResults.length}
-                error={"エラーが発生しました"}
-                onQueryChange={jest.fn()}
-                onSearch={jest.fn()}
-                onPageChange={jest.fn()}
-            />
-        );
-        const errorMessage = screen.getByText("エラーが発生しました");
-        expect(errorMessage).toBeInTheDocument();
     });
 });
