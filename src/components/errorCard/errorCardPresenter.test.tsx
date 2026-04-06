@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen, } from "@/utils/tests/render";
-import ErrorCardPresenter from "../errorCardPresenter";
+import ErrorCardPresenter from "./errorCardPresenter";
 
 describe("ErrorCardPresenter", () => {
 

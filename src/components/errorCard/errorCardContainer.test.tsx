@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen, } from "@/utils/tests/render";
-import ErrorCardContainer from "../errorCardContainer";
+import ErrorCardContainer from "./errorCardContainer";
 
 describe("ErrorCardContainer", () => {
 
@@ -37,6 +37,4 @@ describe("ErrorCardContainer", () => {
             .toBeInTheDocument()
         expect(screen.findByText(componentMessage))
     });
-
-
 });
