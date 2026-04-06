@@ -2,7 +2,6 @@
 import { fetchGitHubRepositoryDetail } from "./fetchGitHubRepositoryDetail";
 import { repositoryMockResponse } from "@/utils/contains/tests/gitHubApi.mock";
 
-
 describe('fetchGitHubRepositoryDetail', () => {
     beforeEach(() => {
         // fetchをモック化
@@ -14,7 +13,7 @@ describe('fetchGitHubRepositoryDetail', () => {
     });
 
 
-    it("200エラーの場合", async () => {
+    test("200エラーの場合", async () => {
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
             ok: true,
@@ -32,7 +31,7 @@ describe('fetchGitHubRepositoryDetail', () => {
         expect(result.data).toEqual(repositoryMockResponse);
     });
 
-    it("200エラーの場合(トークンあり)", async () => {
+    test("200エラーの場合(トークンあり)", async () => {
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
             ok: true,
@@ -49,7 +48,7 @@ describe('fetchGitHubRepositoryDetail', () => {
         expect(result.data).toEqual(repositoryMockResponse);
     });
 
-    it("200エラーの場合(トークンがundefined)", async () => {
+    test("200エラーの場合(トークンがundefined)", async () => {
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
             ok: true,
@@ -66,7 +65,7 @@ describe('fetchGitHubRepositoryDetail', () => {
         expect(result.data).toEqual(repositoryMockResponse);
     });
 
-    it("403エラーの場合", async () => {
+    test("403エラーの場合", async () => {
         const status = 403;
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
@@ -79,7 +78,7 @@ describe('fetchGitHubRepositoryDetail', () => {
         expect(result.status).toEqual(status);
     });
 
-    it("404エラーの場合", async () => {
+    test("404エラーの場合", async () => {
         const status = 404;
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
@@ -92,7 +91,7 @@ describe('fetchGitHubRepositoryDetail', () => {
         expect(result.status).toEqual(status);
     });
 
-    it("500エラーの場合", async () => {
+    test("500エラーの場合", async () => {
         const status = 500;
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({

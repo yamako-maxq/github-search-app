@@ -12,7 +12,7 @@ describe('fetchGitHubRepos', () => {
         jest.resetAllMocks(); // モックをリセット
     });
 
-    it("200エラーの場合", async () => {
+    test("200エラーの場合", async () => {
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
             ok: true,
@@ -30,7 +30,7 @@ describe('fetchGitHubRepos', () => {
         expect(result.data).toEqual(repositoryMockResponse);
     });
 
-    it("200エラーの場合(トークンあり)", async () => {
+    test("200エラーの場合(トークンあり)", async () => {
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
             ok: true,
@@ -50,7 +50,7 @@ describe('fetchGitHubRepos', () => {
         expect(result.data).toEqual(repositoryMockResponse);
     });
 
-    it("200エラーの場合(トークンがundefined)", async () => {
+    test("200エラーの場合(トークンがundefined)", async () => {
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
             ok: true,
@@ -70,7 +70,7 @@ describe('fetchGitHubRepos', () => {
         expect(result.data).toEqual(repositoryMockResponse);
     });
 
-    it("403エラーの場合", async () => {
+    test("403エラーの場合", async () => {
         const status = 403;
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
@@ -83,7 +83,7 @@ describe('fetchGitHubRepos', () => {
 
     });
 
-    it("422エラーの場合", async () => {
+    test("422エラーの場合", async () => {
         const status = 422;
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
@@ -96,7 +96,7 @@ describe('fetchGitHubRepos', () => {
 
     });
 
-    it("503エラーの場合", async () => {
+    test("503エラーの場合", async () => {
         const status = 503;
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({
@@ -109,7 +109,7 @@ describe('fetchGitHubRepos', () => {
 
     });
 
-    it("500エラーの場合", async () => {
+    test("500エラーの場合", async () => {
         const status = 500;
         // モックの実装
         (fetch as jest.Mock).mockResolvedValue({

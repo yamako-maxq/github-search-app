@@ -1,13 +1,13 @@
 import "@testing-library/jest-dom";
 import { render, screen, } from "@/utils/tests/render";
-import RepoDetailPresentation, { DetailCard, StatsItem } from "./repoDetailPresenter";
+import Presenter, { DetailCard, StatsItem } from "./repoDetailPresenter";
 import { repositoryMockResult } from "@/utils/contains/tests/gitHubApi.mock"
 import { IconStar } from "@tabler/icons-react";
 
 describe("RepoDetailPresentation", () => {
     test("詳細情報が正常に表示できているか", async () => {
         render(
-            <RepoDetailPresentation
+            <Presenter
                 detail={repositoryMockResult}
             />
         );
@@ -24,7 +24,7 @@ describe("RepoDetailPresentation", () => {
 
     test("エラーメッセージが正常に表示できているか", () => {
         render(
-            <RepoDetailPresentation
+            <Presenter
                 detail={null}
                 errorMessage="エラーが発生しました"
             />
@@ -41,7 +41,7 @@ describe("RepoDetailPresentation", () => {
 
     test("デフォルトのエラーメッセージが表示できるか", () => {
         render(
-            <RepoDetailPresentation
+            <Presenter
                 detail={null}
             />
         );

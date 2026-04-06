@@ -1,13 +1,13 @@
 import "@testing-library/jest-dom";
 import { render, screen, } from "@/utils/tests/render";
-import ErrorCardPresenter from "../errorCardPresenter";
+import Presenter from "./errorCardPresenter";
 
 describe("ErrorCardPresenter", () => {
 
     test("エラー画面が正常に表示されているか", async () => {
         const errorMessage = "テストエラーテストエラーテストエラー"
         render(
-            <ErrorCardPresenter
+            <Presenter
                 errorMessage={errorMessage}
             />
         );

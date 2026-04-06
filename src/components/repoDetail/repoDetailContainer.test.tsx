@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import RepoDetailContainer from "./repoDetailContainer"; // ファイル名は実際の環境に合わせて変更してください
-import RepoDetailPresenter from "./repoDetailPresenter";
+import Container from "./repoDetailContainer"; // ファイル名は実際の環境に合わせて変更してください
+import Presenter from "./repoDetailPresenter";
 import { fetchGitHubRepositoryDetail } from "@/utils/apis/fetchGitHubRepositoryDetail";
 import { notFound } from "next/navigation";
 import { validateGitHubRepositoryDetail } from "@/utils/validations/gitHubRepositoryDetail";
@@ -29,7 +29,7 @@ jest.mock("@/utils/validations/gitHubRepositoryDetail");
 const mockFetch = fetchGitHubRepositoryDetail as jest.Mock;
 const mockValidate = validateGitHubRepositoryDetail as jest.Mock;
 const mockNotFound = (notFound as unknown) as jest.Mock;
-const MockPresenter = RepoDetailPresenter as jest.Mock;
+const MockPresenter = Presenter as jest.Mock;
 
 describe("RepoDetailContainer", () => {
     const testProps = {
@@ -41,7 +41,7 @@ describe("RepoDetailContainer", () => {
         jest.clearAllMocks();
     });
 
-    it("バリデーションに失敗した場合、エラーカードがレンダリングされること", async () => {
+    test("バリデーションに失敗した場合、エラーカードがレンダリングされること", async () => {
         // バリデーションに失敗
         mockValidate.mockReturnValue(false);
 
@@ -51,7 +51,7 @@ describe("RepoDetailContainer", () => {
             .toHaveBeenCalled();
 
         // Containerをレンダリング
-        const repoDetailContainer = await RepoDetailContainer(testProps);
+        const repoDetailContainer = await Container(testProps);
         render(repoDetailContainer);
 
         // Presentationコンポーネントに正しいPropsが渡されたか
@@ -68,7 +68,7 @@ describe("RepoDetailContainer", () => {
 
     });
 
-    it("APIのステータスが200の場合、データが正常にUIコンポーネントに渡せているか", async () => {
+    test("APIのステータスが200の場合、データが正常にUIコンポーネントに渡せているか", async () => {
         // バリデーションが成功
         mockValidate.mockReturnValue(true);
 
@@ -78,7 +78,7 @@ describe("RepoDetailContainer", () => {
         );
 
         // Containerをレンダリング
-        const repoDetailContainer = await RepoDetailContainer(testProps);
+        const repoDetailContainer = await Container(testProps);
         render(repoDetailContainer);
 
         // Presentationコンポーネントに正しいPropsが渡されたか
@@ -89,7 +89,7 @@ describe("RepoDetailContainer", () => {
             .toHaveBeenCalled();
     });
 
-    it("APIのステータスが404の場合、notFound()が呼び出されているか", async () => {
+    test("APIのステータスが404の場合、notFound()が呼び出されているか", async () => {
         // バリデーションが成功
         mockValidate.mockReturnValue(true);
 
@@ -97,7 +97,7 @@ describe("RepoDetailContainer", () => {
         mockFetch.mockResolvedValue({ status: 404 });
 
         // Containerをレンダリング
-        const repoDetailContainer = await RepoDetailContainer(testProps);
+        const repoDetailContainer = await Container(testProps);
         render(repoDetailContainer);
 
         // NotFoundがが呼ばれたか
@@ -110,7 +110,7 @@ describe("RepoDetailContainer", () => {
             .toHaveBeenCalled();
     });
 
-    it("APIのステータスが事前に定義したコード以外の場合でも、エラーメッセージを返しているか", async () => {
+    test("APIのステータスが事前に定義したコード以外の場合でも、エラーメッセージを返しているか", async () => {
         // バリデーションが成功
         mockValidate.mockReturnValue(true);
 
@@ -124,7 +124,7 @@ describe("RepoDetailContainer", () => {
         );
 
         // Containerをレンダリング
-        const resolvedComponent = await RepoDetailContainer(testProps);
+        const resolvedComponent = await Container(testProps);
         render(resolvedComponent);
 
         // 事前に定義したメッセージを返しているか
@@ -134,7 +134,7 @@ describe("RepoDetailContainer", () => {
         })
     });
 
-    it("APIのステータスが200で、レスポンスデータがNULLの場合、エラーメッセージを返しているか", async () => {
+    test("APIのステータスが200で、レスポンスデータがNULLの場合、エラーメッセージを返しているか", async () => {
         // バリデーションが成功
         mockValidate.mockReturnValue(true);
 
@@ -142,7 +142,7 @@ describe("RepoDetailContainer", () => {
         mockFetch.mockResolvedValue({ status: 200, data: null });
 
         // Containerをレンダリング
-        const resolvedComponent = await RepoDetailContainer(testProps);
+        const resolvedComponent = await Container(testProps);
         render(resolvedComponent);
 
         // Presentationコンポーネントに正しいPropsが渡されたか

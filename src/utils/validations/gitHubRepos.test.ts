@@ -1,9 +1,8 @@
-// api.test.ts
 import { validateGitHubRepos } from "./gitHubRepos";
 import { generateRandomTxt } from "@/utils/tests/random";
 
 describe('validateGitHubRepos', () => {
-    it("正常系", async () => {
+    test("正常系", async () => {
         expect(validateGitHubRepos("正常クエリ", 1))
             .toBe(true);
 
@@ -18,7 +17,7 @@ describe('validateGitHubRepos', () => {
             .toBe(true);
     });
 
-    it("異常系", async () => {
+    test("異常系", async () => {
         const txt = generateRandomTxt(1200)
         expect(validateGitHubRepos(txt, 1))
             .toBe(false);

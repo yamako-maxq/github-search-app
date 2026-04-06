@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@/utils/tests/render";
-import GitHubRepos, { SearchInput, SearchList, SearchSkeleton } from "./gitHubReposPresenter";
+import Presenter, { SearchInput, SearchList, SearchSkeleton } from "./gitHubReposPresenter";
 import { repositoryMockResults, repositoryMockResult } from "@/utils/contains/tests/gitHubApi.mock";
 
 const QUERY = "yamako-maxq/github-search-app";
@@ -11,7 +11,7 @@ const QUERY = "yamako-maxq/github-search-app";
 describe("GitHubRepos", () => {
     test("検索画面が正常に表示できているか", () => {
         render(
-            <GitHubRepos
+            <Presenter
                 query={QUERY}
                 loading={false}
                 results={repositoryMockResults}
@@ -31,7 +31,7 @@ describe("GitHubRepos", () => {
 
     test("ローディング時にスケルトンが表示されること", () => {
         render(
-            <GitHubRepos
+            <Presenter
                 query={QUERY}
                 loading={true}
                 results={repositoryMockResults}
@@ -50,7 +50,7 @@ describe("GitHubRepos", () => {
     test("onKeyDown イベントが正しく処理されること", () => {
         const onSearchMock = jest.fn();
         render(
-            <GitHubRepos
+            <Presenter
                 query={QUERY}
                 loading={false}
                 results={repositoryMockResults}
@@ -71,7 +71,7 @@ describe("GitHubRepos", () => {
 
     test("エラーが表示されること", () => {
         render(
-            <GitHubRepos
+            <Presenter
                 query={QUERY}
                 loading={false}
                 results={[]}

@@ -2,13 +2,12 @@ import { validateGitHubRepositoryDetail } from "./gitHubRepositoryDetail";
 import { generateRandomTxt } from "@/utils/tests/random";
 
 describe('validateGitHubRepositoryDetail', () => {
-    it("正常系", () => {
+    test("正常系", () => {
         expect(validateGitHubRepositoryDetail("owner", "repo"))
             .toBe(true);
-
     });
 
-    it("異常系", () => {
+    test("異常系", () => {
         const txt = generateRandomTxt(1200)
         expect(validateGitHubRepositoryDetail(txt, "repo"))
             .toBe(false);
