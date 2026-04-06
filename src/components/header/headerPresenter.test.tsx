@@ -7,7 +7,7 @@ import HeaderPresenter from "./headerPresenter";
 const headerTitle = "Github Search App";
 
 describe("headerPresenter", () => {
-    it("渡されたタイトルが正しくレンダリングされること", () => {
+    test("渡されたタイトルが正しくレンダリングされること", () => {
         MantineRenderProvider(<HeaderPresenter title={headerTitle} />);
 
         // headerTitleの内容が画面内に存在するか
@@ -15,7 +15,7 @@ describe("headerPresenter", () => {
         expect(headerElement).toBeInTheDocument();
     });
 
-    it("headerタグが適切なクラスを持っていること", () => {
+    test("headerタグが適切なクラスを持っていること", () => {
         const { container } = MantineRenderProvider(<HeaderPresenter title={headerTitle} />);
 
         // header要素を取得（querySelectorまたはroleで取得）
