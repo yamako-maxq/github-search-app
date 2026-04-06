@@ -21,7 +21,7 @@ import {
     IconAlertCircle
 } from "@tabler/icons-react";
 
-import ErrorCardContainer from "../errorCard";
+import ErrorCardContainer from "@/components/errorCard";
 
 /** 
  * リポジトリの詳細を表示するプレゼンテーションコンポーネント

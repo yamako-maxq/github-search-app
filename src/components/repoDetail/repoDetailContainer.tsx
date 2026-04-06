@@ -18,11 +18,20 @@ type DetailPageProps = {
 export default async function RepoDetailContainer({ owner, repo }: DetailPageProps) {
     // パラメーターのバリデーション
     if (!validateGitHubRepositoryDetail(owner, repo)) {
-        throw new Error("Validation Error")
+        return <RepoDetailPresentation
+            detail={null}
+            errorMessage={"システムエラーが発生しました"}
+        />;
     }
 
     // URLパラメータからリポジトリの詳細情報を取得
-    const response = await fetchGitHubRepositoryDetail(owner, repo);
+    const response = await fetchGitHubRepositoryDetail(
+        owner,
+        repo,
+        {
+            token: process.env.GITHUB_TOKEN
+        }
+    );
 
     // レスポンスに応じて処理を変える
     if (response.status === 200) {
@@ -34,7 +43,7 @@ export default async function RepoDetailContainer({ owner, repo }: DetailPagePro
     } else {
         return <RepoDetailPresentation
             detail={null}
-            errorMessage={response.message || "エラーが発生しました"}
+            errorMessage={response.message}
         />;
     }
 }
