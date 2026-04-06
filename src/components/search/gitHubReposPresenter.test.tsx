@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@/utils/tests/render";
-import GitHubRepos, { SearchInput, SearchList, SearchSkeleton } from "../gitHubReposPresenter";
-import { repositoryMockResults, repositoryMockResult } from "./mockData";
+import GitHubRepos, { SearchInput, SearchList, SearchSkeleton } from "./gitHubReposPresenter";
+import { repositoryMockResults, repositoryMockResult } from "@/utils/contains/tests/gitHubApi.mock";
 
 const QUERY = "yamako-maxq/github-search-app";
 

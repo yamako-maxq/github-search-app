@@ -1,4 +1,4 @@
-import { GitHubRepository } from "@/types/github";
+import { GitHubRepository, GitHubSearchResponse } from "@/types/github";
 
 export const repositoryMockResult: GitHubRepository = {
     "id": 1,
@@ -15,4 +15,24 @@ export const repositoryMockResult: GitHubRepository = {
     "open_issues_count": 0,
     "language": "TypeScript",
     "html_url": "https://github.com/yamako-maxq/github-search-app",
+}
+
+export const repositoryMockResults: GitHubRepository[] = [
+    {
+        ...repositoryMockResult,
+        "id": 1,
+    },
+    {
+        ...repositoryMockResult,
+        "id": 2,
+    },
+    {
+        ...repositoryMockResult,
+        "id": 3,
+    },
+]
+
+export const repositoryMockResponse: GitHubSearchResponse = {
+    total_count: 1,
+    items: repositoryMockResults
 }

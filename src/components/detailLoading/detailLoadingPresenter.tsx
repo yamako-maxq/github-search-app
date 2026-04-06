@@ -9,9 +9,9 @@ import {
     Paper
 } from "@mantine/core";
 
-export default function detailLoadingPresenter() {
+export default function DetailLoadingPresenter() {
     return (
-        <Container size="md" py="xl">
+        <Container size="md" py="xl" data-testid="detail-loading-card">
             <Stack gap="md">
                 <Card padding="md" radius="md" withBorder>
                     <Group align="flex-start" mb="lg">

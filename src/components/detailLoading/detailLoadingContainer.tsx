@@ -1,5 +1,5 @@
 import DetailLoadingPresenter from "./detailLoadingPresenter";
 
-export default function detailLoadingContainer() {
+export default function DetailLoadingContainer() {
     return <DetailLoadingPresenter />;
 }

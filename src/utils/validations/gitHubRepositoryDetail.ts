@@ -8,6 +8,6 @@ export const validateGitHubRepositoryDetail = (owner: string, repo: string): boo
     // githubのユーザー数とリポジトリ名は最大39文字だが、
     // 変更される可能性を考慮、かつReDoS攻撃の危険性も考慮し、最大1000文字とする
     const ownerRegex = /^[a-zA-Z0-9-]{1,1000}$/;
-    const repoRegex = /^[a-zA-Z0-9_.-]+$/;
+    const repoRegex = /^[a-zA-Z0-9_.-]{1,1000}$/;
     return ownerRegex.test(owner) && repoRegex.test(repo);
 };

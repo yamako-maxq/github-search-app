@@ -1,14 +1,18 @@
 import { httpResponse } from "@/types/httpResponse";
 import { GitHubRepository } from "@/types/github";
 
+type Option = {
+    token?: string
+}
+
 /**
  * リポジトリ詳細のAPIを取得する関数
  * @param owner string - リポジトリの所有者
  * @param repo string - リポジトリ名
  * @returns Promise<httpResponse<GitHubRepository>> - レスポンス
  */
-export const fetchGitHubRepositoryDetail = async (owner: string, repo: string): Promise<httpResponse<GitHubRepository>> => {
-    const token = process.env.GITHUB_TOKEN;
+export const fetchGitHubRepositoryDetail = async (owner: string, repo: string, option?: Option): Promise<httpResponse<GitHubRepository>> => {
+    const token = option?.token || undefined
     const res = await fetch(`${process.env.NEXT_PUBLIC_GITHUB_API_URL}/repos/${owner}/${repo}`, {
         headers: {
             // トークンがある場合はヘッダーに追加してレートリミットを緩和

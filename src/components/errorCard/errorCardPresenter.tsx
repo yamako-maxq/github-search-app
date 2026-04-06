@@ -3,8 +3,7 @@ import {
     Text,
     Group,
     Title,
-    Box,
-    Button,
+    Box
 } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons-react";
 
@@ -21,7 +20,7 @@ export default function ErrorCardPresenter({ errorMessage, component }: { errorM
                 <Box style={{ flex: 1 }}>
                     <Title order={3} mb={"5px"}>エラー</Title>
                     <Text c="dimmed" data-testid="repository-detail-error-text">
-                        {errorMessage ?? "予期せぬエラーが発生しました"}
+                        {errorMessage}
                     </Text>
                 </Box>
             </Group>

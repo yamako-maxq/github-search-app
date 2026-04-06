@@ -1,6 +1,10 @@
 import { httpResponse } from "@/types/httpResponse";
 import { GitHubSearchResponse } from "@/types/github";
 
+type Option = {
+    token?: string
+}
+
 /**
  * GitHubのリポジトリを検索する
  * @param searchQuery 検索クエリ
@@ -10,7 +14,8 @@ import { GitHubSearchResponse } from "@/types/github";
 export const fetchGitHubRepos = async (
     searchQuery: string,
     page: number,
-    perPage: number
+    perPage: number,
+    option?: Option
 ): Promise<httpResponse<GitHubSearchResponse>> => {
 
     // APIリクエストのクエリパラメータを構築
@@ -19,10 +24,16 @@ export const fetchGitHubRepos = async (
         page: page.toString(),
         per_page: perPage.toString(),
     });
-
+    const token = option?.token || undefined
     const res = await fetch(`${process.env.NEXT_PUBLIC_GITHUB_API_URL}/search/repositories?${params}`, {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            // トークンがある場合はヘッダーに追加してレートリミットを緩和
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.github.v3+json",
+            "X-GitHub-Api-Version": "2026-03-10",
+        },
         cache: "force-cache"
     });
 
