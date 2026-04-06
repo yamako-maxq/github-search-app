@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import MantineRenderProvider from "@/components/test/mantineRenderProvider";
 import { screen } from "@testing-library/react";
-import HeaderPresenter from "../headerPresenter";
+import HeaderPresenter from "./headerPresenter";
 
 // ヘッダーのタイトル
 const headerTitle = "Github Search App";
