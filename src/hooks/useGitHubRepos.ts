@@ -42,6 +42,7 @@ export const useGitHubRepos = () => {
         setLoading(false);
         if (response.status === 200) {
             const data = response.data ? response.data as GitHubSearchResponse : null;
+            const items = data?.items || []
             if (!data) {
                 notFoundHandler()
                 return
@@ -49,7 +50,7 @@ export const useGitHubRepos = () => {
                 notFoundHandler()
                 return
             }
-            setResults(data?.items || []);
+            setResults(items);
             setTotalPages(
                 calcTotalPageHandler(
                     data.total_count,
