@@ -1,7 +1,7 @@
 name: Image Build
 
 on:
-  # 作業ブランチからdevelopブランチへプルリクを出した時に実行
+  # mainブランチにpushされた時に実行
   push:
     branches: ["main"]
     
