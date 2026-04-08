@@ -25,6 +25,7 @@ export default function SearchGitHubReposContainer() {
 
     // 検索実行時の処理
     const handleSearchClick = () => {
+        if (query.trim() === "") return;
         setActivePage(1);
         searchRepos(query, 1);
     };
