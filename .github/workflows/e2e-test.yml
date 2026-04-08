@@ -2,6 +2,8 @@ name: End to End test
 
 on:
   pull_request:
+    paths:
+      - '!**.md'  
     branches: ["main"]
     types: ["opened", "synchronize", "reopened"]
   
