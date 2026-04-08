@@ -4,6 +4,9 @@ import { useQueryState, parseAsInteger } from "nuqs";
 import SearchPresenter from "./gitHubReposPresenter";
 import { useGitHubRepos } from "@/hooks/useGitHubRepos";
 
+/**
+ * リポジトリの検索ページを表示するプレゼンテーションコンポーネント
+ */
 export default function SearchGitHubReposContainer() {
     // GitHub検索のロジックをカスタムフックから取得
     const {

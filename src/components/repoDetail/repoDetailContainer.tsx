@@ -13,7 +13,6 @@ type DetailPageProps = {
  * リポジトリの詳細を表示するコンテナコンポーネント
  * @param owner string - リポジトリのユーザー名
  * @param repo string - リポジトリ名
- * @returns リポジトリ詳細の検索結果
  */
 export default async function RepoDetailContainer({ owner, repo }: DetailPageProps) {
     // パラメーターのバリデーション

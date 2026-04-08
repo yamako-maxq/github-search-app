@@ -10,6 +10,7 @@ type Option = {
  * @param searchQuery 検索クエリ
  * @param page ページ番号
  * @param perPage 1ページあたりの結果数
+ * @returns Promise<httpResponse<GitHubSearchResponse>> - レスポンス
  */
 export const fetchGitHubRepos = async (
     searchQuery: string,

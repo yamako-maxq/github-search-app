@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen, } from "@/utils/tests/render";
+import { render, screen } from "@/utils/tests/render";
 import Presenter, { DetailCard, StatsItem } from "./repoDetailPresenter";
 import { repositoryMockResult } from "@/utils/contains/tests/gitHubApi.mock"
 import { IconStar } from "@tabler/icons-react";

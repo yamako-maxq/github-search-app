@@ -10,7 +10,6 @@ import { IconAlertCircle } from "@tabler/icons-react";
 /**
  * エラーメッセージを表示するプレゼンテーションコンポーネント
  * @param errorMessage string - エラーメッセージ
- * @returns エラーメッセージのコンポーネント
  */
 export default function ErrorCardPresenter({ errorMessage, component }: { errorMessage: string, component?: React.ReactNode }) {
     return (

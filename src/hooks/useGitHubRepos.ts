@@ -4,6 +4,9 @@ import { GitHubRepository, GitHubSearchResponse } from "@/types/github";
 import { fetchGitHubRepos } from "@/utils/apis/fetchGitHubRepos";
 import { validateGitHubRepos } from "@/utils/validations/gitHubRepos";
 
+/**
+ * gitHubのリポジトリ情報を取得するカスタムフックス
+ */
 export const useGitHubRepos = () => {
     const [results, setResults] = useState<GitHubRepository[]>([]);
     const [loading, setLoading] = useState(false);

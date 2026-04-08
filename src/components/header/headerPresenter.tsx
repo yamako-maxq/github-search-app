@@ -6,6 +6,10 @@ type HeaderProps = {
     title: string;
 };
 
+/**
+ * ヘッダーを表示するプレゼンテーションコンポーネント
+ * @param title string - タイトル
+ */
 export default function HeaderPresenter({ title }: HeaderProps) {
     return (
         <header className={classes.header}>

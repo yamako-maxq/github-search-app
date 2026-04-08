@@ -27,7 +27,6 @@ import ErrorCardContainer from "@/components/errorCard";
  * リポジトリの詳細を表示するプレゼンテーションコンポーネント
  * @param detail DetailPresentationProps - リポジトリの詳細情報
  * @param errorMessage string - エラーメッセージ
- * @returns リポジトリ詳細の検索結果
  */
 export default function RepoDetailPresentation({ detail, errorMessage }: {
     detail: GitHubRepository | null;
@@ -62,10 +61,10 @@ export default function RepoDetailPresentation({ detail, errorMessage }: {
         </Container>
     );
 }
+
 /**
  * リポジトリの詳細情報を表示するコンポーネント
  * @param detail GitHubRepository - リポジトリの詳細情報
- * @returns リポジトリの詳細情報
  */
 export function DetailCard(props: {
     avatar_url: string,
@@ -161,7 +160,6 @@ export function DetailCard(props: {
  * @param icon React.ReactNode - アイコン
  * @param label string - ラベル
  * @param value number - 各種カウント
- * @returns 
  */
 export function StatsItem(props: {
     icon: React.ReactNode,

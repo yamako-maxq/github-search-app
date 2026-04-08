@@ -9,6 +9,9 @@ import {
     Paper
 } from "@mantine/core";
 
+/** 
+ * ローディング画面表示するプレゼンテーションコンポーネント
+ */
 export default function DetailLoadingPresenter() {
     return (
         <Container size="md" py="xl" data-testid="detail-loading-card">

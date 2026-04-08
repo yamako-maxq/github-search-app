@@ -41,8 +41,6 @@ type presenterProps = {
  * @param onQueryChange - クエリ変更時の処理
  * @param onSearch - 検索実行時の処理
  * @param onPageChange - ページ変更時の処理
- * 
- * @returns リポジトリの検索結果
  */
 export default function GitHubRepos({
     query,
