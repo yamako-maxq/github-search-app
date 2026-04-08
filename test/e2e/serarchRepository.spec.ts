@@ -63,6 +63,8 @@ test("ページネーションが正しく動作するか", async ({ page }) => 
   // 2ページ目へ移動
   await page.getByRole('button', { name: '2' }).click()
 
+  await page.waitForTimeout(1000)
+  
   // 移動したらURLが変化しているか
   expect(page).toHaveURL(`/search/repositories?q=${searchText}&page=2`)
 });
