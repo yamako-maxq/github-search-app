@@ -11,6 +11,7 @@ on:
       - "**.cjs"
       - "package.json"
       - "package-lock.json"
+      - '!**.md'  
 
 jobs:
   unit-test:
