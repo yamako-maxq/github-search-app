@@ -8,7 +8,7 @@ const createBasicAuth = (username: string, password: string): string => {
 }
 
 const testUserName = "hogehoge"
-const testPassword = "67.+0xBwG6pyo"
+const testPassword = "testPassword"
 const basicAuthValue = createBasicAuth(testUserName, testPassword)
 
 describe('validateGitHubRepos', () => {
@@ -23,13 +23,23 @@ describe('validateGitHubRepos', () => {
         expect(result).toBe(true)
     });
 
-    test("Basic認証を行う設定だが、パスワードなどの設定がない場合は認証を失敗させる", async () => {
+    test("ユーザ名とパスワードが未設定の場合は認証を失敗させる", async () => {
         const result = verifyBasicAuthCredentials("true", null, undefined, undefined)
+        expect(result).toBe(false)
+    });
+
+    test("認証ヘッダーが無い場合は認証を失敗させる", async () => {
+        const result = verifyBasicAuthCredentials("true", null, testUserName, testUserName)
         expect(result).toBe(false)
     });
 
     test("Basic認証を行わない設定だが、パスワードなどの設定がある場合は認証を成功させる", async () => {
         const result = verifyBasicAuthCredentials(undefined, basicAuthValue, testUserName, testPassword)
+        expect(result).toBe(true)
+    });
+
+    test("Basic認証を行わない設定だが、パスワードなどの設定がある場合は認証を成功させる", async () => {
+        const result = verifyBasicAuthCredentials(undefined, null, undefined, undefined)
         expect(result).toBe(true)
     });
 

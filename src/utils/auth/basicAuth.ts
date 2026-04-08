@@ -6,7 +6,7 @@ export function verifyBasicAuthCredentials(
     basicUserName: string | undefined,
     basicPassword: string | undefined
 ): boolean {
-    if (!needsBasicAuth(basicAuth, basicUserName, basicPassword)) {
+    if (!needsBasicAuth(basicAuth)) {
         return true
     }
 
@@ -28,15 +28,7 @@ export function verifyBasicAuthCredentials(
 }
 
 export function needsBasicAuth(
-    basicAuth: string | undefined,
-    basicUserName: string | undefined,
-    basicPassword: string | undefined
+    basicAuth: string | undefined
 ): boolean {
-    if (
-        basicUserName === undefined ||
-        basicPassword === undefined
-    ) {
-        return true
-    }
     return basicAuth === "true"
 }
