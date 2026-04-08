@@ -30,24 +30,24 @@ jobs:
           NEXT_PUBLIC_GITHUB_API_URL: http://localhost:3001
         run: npm run build
 
+      - name: Install Playwright Browsers
+        run: npm run test:e2e:install
+
       - name: Start Mock Server
-        run: npm run test:e2e &
+        run: npm run test:e2e:mock &
         env:
           PORT: 3001
-
-      - name: Wait for app to be ready
-        run: npx wait-on http://localhost:3001
 
       - name: Start Next.js app
         run: npm run start &
         env:
           PORT: 3000
 
+      - name: Wait for mock server to be ready
+        run: npx wait-on http://localhost:3001
+
       - name: Wait for app to be ready
         run: npx wait-on http://localhost:3000
-
-      - name: Install Playwright Browsers
-        run: npm run test:e2e:install
 
       - name: Run Playwright tests
         run: npm run test:e2e
