@@ -1,5 +1,7 @@
 FROM node:22.16.0-alpine3.22 AS builder
 WORKDIR /app
+ARG NEXT_PUBLIC_GITHUB_API_URL
+ENV NEXT_PUBLIC_GITHUB_API_URL=$NEXT_PUBLIC_GITHUB_API_URL
 COPY ./package.json package-lock.json ./
 RUN \
 --mount=type=cache,target=/root/.npm \
