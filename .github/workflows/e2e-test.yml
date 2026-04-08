@@ -7,6 +7,11 @@ on:
   
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   test:
     timeout-minutes: 10
@@ -55,9 +60,24 @@ jobs:
       - name: Run Playwright tests
         run: npm run test:e2e
 
-      - name: Upload HTML report (on failure)
-        if: failure()
-        uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
           name: playwright-report
-          path: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        if: ${{ !cancelled() }}
+
+      - name: Upload Artifacts to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        if: ${{ !cancelled() }}
+        with:
+          path: ./playwright-report
+
+      - name: Deploy to GitHub Pages
+        if: ${{ !cancelled() }}
+        id: deployment
+        uses: actions/deploy-pages@v4
