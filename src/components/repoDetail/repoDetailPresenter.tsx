@@ -102,6 +102,9 @@ export function DetailCard(props: {
                             mt="5px"
                             aria-label="language"
                             data-testid="repository-language"
+                            style={{
+                                "text-transform": "none",
+                            }}
                         >
                             {props.language}
                         </Badge>
