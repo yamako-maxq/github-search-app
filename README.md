@@ -28,7 +28,7 @@ Error response from daemon: Head "https://ghcr.io/v2/yamako-maxq/github-search-a
 docker logout ghcr.io
 ```
 
-起動したら、こちらから確認してください。
+こちらから確認してください。
 http://localhost:3000/
 
 ## 機能
