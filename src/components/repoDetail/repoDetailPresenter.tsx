@@ -41,7 +41,7 @@ export default function RepoDetailPresentation({ detail, errorMessage }: {
                         name={detail.name}
                         language={detail.language}
                         stargazers_count={detail.stargazers_count}
-                        watchers_count={detail.watchers_count}
+                        watchers_count={detail?.subscribers_count ?? 0}
                         forks_count={detail.forks_count}
                         open_issues_count={detail.open_issues_count}
                     />
